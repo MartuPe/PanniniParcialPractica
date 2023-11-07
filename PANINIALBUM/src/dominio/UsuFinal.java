@@ -38,6 +38,31 @@ public class UsuFinal extends Usuario {
 		return figusPegadas;
 	}
 
+	public void intercambiarFigu(Figurita figu, Figurita figuArecibir) throws FiguritaNoDisponibleException {
+		Figurita encontrada = buscarFigu(figu);
 
+		if (encontrada != null) {
+			stockFigus.remove(encontrada);
+			stockFigus.add(figuArecibir);
+		}
+
+	}
+
+	private Figurita buscarFigu(Figurita figu) throws FiguritaNoDisponibleException {
+		for (Figurita figurita : figusPegadas) {
+			if (figurita != null) {
+				throw new FiguritaNoDisponibleException();
+			}
+		}
+
+		for (Figurita figurita : stockFigus) {
+			if (figurita != null) {
+				return figurita;
+			}else {
+				throw new FiguritaNoDisponibleException();
+			}
+		}
+		return null;
+	}
 
 }

@@ -9,6 +9,7 @@ import org.junit.Test;
 import dominio.Administrador;
 import dominio.CodigoExistenteException;
 import dominio.Figurita;
+import dominio.FiguritaNoDisponibleException;
 import dominio.FiguritaRepetidaException;
 import dominio.UsuFinal;
 import dominio.Usuario;
@@ -133,8 +134,21 @@ public class TestAlbum {
   }
 
   @Test
-  public void  queSePuedaRealizarElIntercambioDeFiguritasEntreDosUsuariosFinales() {
-      
+  public void  queSePuedaRealizarElIntercambioDeFiguritasEntreDosUsuariosFinales() throws FiguritaNoDisponibleException {
+	  UsuFinal usu1 = new UsuFinal("Martucapa");
+	  UsuFinal usu2 = new UsuFinal("Pepe");
+	  Figurita figuAdar = new Figurita("Argentina", 9, 'A', "Martupe", 98000.0);
+	  Figurita figuArecibir = new Figurita("Argentina", 9, 'A', "Martupe", 98000.0);
+	  
+	  usu1.agregarFigurita(figuAdar);
+	  usu2.agregarFigurita(figuArecibir);
+	  
+	  usu1.intercambiarFigu(figuAdar, figuArecibir);
+	  usu2.intercambiarFigu(figuArecibir, figuArecibir);
+	  
+	  assertTrue(usu1.getFiguritasEnStock().contains(figuArecibir));
+	  assertTrue(usu2.getFiguritasEnStock().contains(figuAdar));
+	  
   }
 
 //  @Test
