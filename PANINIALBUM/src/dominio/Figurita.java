@@ -63,22 +63,7 @@ public class Figurita implements Comparable<Figurita> {
 		this.valor = valor;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(numFigu, seleccion);
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Figurita other = (Figurita) obj;
-		return Objects.equals(numFigu, other.numFigu) && Objects.equals(seleccion, other.seleccion);
-	}
 
 	@Override
 	public int compareTo(Figurita o) {

@@ -10,4 +10,5 @@ public abstract class Usuario {
 	
 	public abstract void agregarFigurita(Figurita figu) throws CodigoExistenteException;
 
+
 }

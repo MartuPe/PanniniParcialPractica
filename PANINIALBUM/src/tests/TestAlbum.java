@@ -78,27 +78,48 @@ public class TestAlbum {
 		usuFinal.agregarFigurita(figu5);
 		usuFinal.agregarFigurita(figu6);
 
-		TreeSet<Figurita> figusOrdenadas= (TreeSet<Figurita>) ((UsuFinal) usuFinal).getFiguritasEnStock();
-		
-		assertEquals(figusOrdenadas.first(), figu6); 
+		TreeSet<Figurita> figusOrdenadas = (TreeSet<Figurita>) ((UsuFinal) usuFinal).getFiguritasEnStock();
+
+		assertEquals(figusOrdenadas.first(), figu6);
 		assertEquals(figusOrdenadas.last(), figu4);
-		
+
 	}
 
-//  @Test
-//  public void  queUnAdministradorNoPuedaAgregarUnaFiguritaExistente() {
-//      fail("Not yet implemented");
-//  }
-//
-//  @Test
-//  public void queUnUsuarioFinalSiPuedaAgregarFiguritasExistentes() {
-//      fail("Not yet implemented");
-//  }
-//  @Test
-//  public void queUnUsuarioFinalPuedaPegarUnaFigurita() {
-//      fail("Not yet implemented");
-//  }
-//
+	@Test(expected = CodigoExistenteException.class)
+	public void queUnAdministradorNoPuedaAgregarUnaFiguritaExistente() throws CodigoExistenteException {
+		Usuario admin = new Administrador("Martucapa");
+		Figurita figu = new Figurita("Argentina", 9, 'A', "Martupe", 98000.0);
+
+		admin.agregarFigurita(figu);
+		admin.agregarFigurita(figu);
+	}
+
+	@Test
+	public void queUnUsuarioFinalSiPuedaAgregarFiguritasExistentes() throws CodigoExistenteException {
+		Usuario usuFinal = new UsuFinal("Martucapa");
+		Figurita figu = new Figurita("Argentina", 9, 'A', "Martupe", 98000.0);
+		Figurita figu2 = new Figurita("Argentina", 9, 'A', "Martupe", 98000.0);
+		Figurita figu3 = new Figurita("Argentina", 9, 'A', "Martupe", 98000.0);
+
+		usuFinal.agregarFigurita(figu);
+		usuFinal.agregarFigurita(figu2);
+		usuFinal.agregarFigurita(figu3);
+		
+		assertTrue(((UsuFinal)usuFinal).getFiguritasEnStock().contains(figu));
+		assertTrue(((UsuFinal)usuFinal).getFiguritasEnStock().contains(figu2));
+		assertTrue(((UsuFinal)usuFinal).getFiguritasEnStock().contains(figu3));
+	}
+
+  @Test
+  public void queUnUsuarioFinalPuedaPegarUnaFigurita() {
+		Usuario usuFinal = new UsuFinal("Martucapa");
+		Figurita figu = new Figurita("Argentina", 9, 'A', "Martupe", 98000.0);
+		
+		usuFinal.pegarFigu(figu);
+		
+		assertTrue(((UsuFinal)usuFinal).getFigusPegadas().contains(figu));
+  }
+
 //  @Test
 //  public void queUnUsuarioFinalNoPuedaPegarUnaFiguritaRepetida() {
 //      fail("Not yet implemented");
