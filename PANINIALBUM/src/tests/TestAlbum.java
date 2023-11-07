@@ -151,13 +151,4 @@ public class TestAlbum {
 	  
   }
 
-//  @Test
-//  public void  queNoSePuedaIntercambiarUnaFiguritaDeUnUsuarioQueNoLaTenga() {
-//      fail("Not yet implemented");
-//  }
-//  @Test
-//  public void  queNoSePuedaIntercambiarUnaFiguritaDeUnUsuarioQueYaLaHayaPegado() {
-//      fail("Not yet implemented");
-//  }
-//
 }
