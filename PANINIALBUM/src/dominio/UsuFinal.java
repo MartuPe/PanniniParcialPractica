@@ -34,4 +34,10 @@ public class UsuFinal extends Usuario {
 		return stockFigus;
 	}
 
+	public ArrayList<Figurita> getFigusPegadas() {
+		return figusPegadas;
+	}
+
+
+
 }

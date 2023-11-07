@@ -9,6 +9,7 @@ import org.junit.Test;
 import dominio.Administrador;
 import dominio.CodigoExistenteException;
 import dominio.Figurita;
+import dominio.FiguritaRepetidaException;
 import dominio.UsuFinal;
 import dominio.Usuario;
 
@@ -104,32 +105,38 @@ public class TestAlbum {
 		usuFinal.agregarFigurita(figu);
 		usuFinal.agregarFigurita(figu2);
 		usuFinal.agregarFigurita(figu3);
-		
-		assertTrue(((UsuFinal)usuFinal).getFiguritasEnStock().contains(figu));
-		assertTrue(((UsuFinal)usuFinal).getFiguritasEnStock().contains(figu2));
-		assertTrue(((UsuFinal)usuFinal).getFiguritasEnStock().contains(figu3));
+
+		assertTrue(((UsuFinal) usuFinal).getFiguritasEnStock().contains(figu));
+		assertTrue(((UsuFinal) usuFinal).getFiguritasEnStock().contains(figu2));
+		assertTrue(((UsuFinal) usuFinal).getFiguritasEnStock().contains(figu3));
 	}
 
-  @Test
-  public void queUnUsuarioFinalPuedaPegarUnaFigurita() {
-		Usuario usuFinal = new UsuFinal("Martucapa");
+	@Test
+	public void queUnUsuarioFinalPuedaPegarUnaFigurita() throws FiguritaRepetidaException {
+		UsuFinal usuFinal = new UsuFinal("Martucapa");
 		Figurita figu = new Figurita("Argentina", 9, 'A', "Martupe", 98000.0);
-		
+
+		usuFinal.pegarFigu(figu);
+
+		assertTrue(usuFinal.getFigusPegadas().contains(figu));
+	}
+
+  @Test(expected = FiguritaRepetidaException.class)
+  public void queUnUsuarioFinalNoPuedaPegarUnaFiguritaRepetida() throws FiguritaRepetidaException {
+		UsuFinal usuFinal = new UsuFinal("Martucapa");
+		Figurita figu = new Figurita("Argentina", 9, 'A', "Martupe", 98000.0);
+
+		usuFinal.pegarFigu(figu);
 		usuFinal.pegarFigu(figu);
 		
-		assertTrue(((UsuFinal)usuFinal).getFigusPegadas().contains(figu));
+
   }
 
-//  @Test
-//  public void queUnUsuarioFinalNoPuedaPegarUnaFiguritaRepetida() {
-//      fail("Not yet implemented");
-//  }
-//
-//  @Test
-//  public void  queSePuedaRealizarElIntercambioDeFiguritasEntreDosUsuariosFinales() {
-//      fail("Not yet implemented");
-//  }
-//
+  @Test
+  public void  queSePuedaRealizarElIntercambioDeFiguritasEntreDosUsuariosFinales() {
+      
+  }
+
 //  @Test
 //  public void  queNoSePuedaIntercambiarUnaFiguritaDeUnUsuarioQueNoLaTenga() {
 //      fail("Not yet implemented");
